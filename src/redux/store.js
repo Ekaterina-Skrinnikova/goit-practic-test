@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
@@ -8,29 +8,31 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
-import { currencyReducer } from '../redux/currency/currencySlice'
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { currencyReducer } from '../redux/currency/currencySlice';
 
 const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ["baseCurrency"]
-}
+  whitelist: ['baseCurrency'],
+};
 
-const persistedReducer = persistReducer(persistConfig, currencyReducer)
+const persistedReducer = persistReducer(persistConfig, currencyReducer);
 
 export const store = configureStore({
   reducer: {
     currency: persistedReducer,
   },
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-})
+});
 
-export const persistor = persistStore(store)
+export const persistor = persistStore(store);
+
+//state => currency => state => baseCurrency
