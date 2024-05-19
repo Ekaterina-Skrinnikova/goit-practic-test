@@ -2,12 +2,18 @@
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Header } from './components';
-import { lazy } from 'react';
+import { lazy, useEffect } from 'react';
+import { getUserInfo } from './service';
 
 const Home = lazy(() => import('pages/Home'));
 const Rates = lazy(() => import('pages/Rates'));
 
 export const App = () => {
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(({coords}) => {
+      getUserInfo(coords)
+    })
+  }, [])
   return (
     <Routes>
       <Route path="/" element={<Header />}>
