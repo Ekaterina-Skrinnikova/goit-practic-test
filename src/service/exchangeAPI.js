@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const instance = axios.create({
   baseURL: 'https://api.apilayer.com/exchangerates_data/',
-  headers: { apikey: '' },
+  headers: { apikey: 'eTEOJVDshzfRdPWjpP25We1YD0BsdT31' },
 });
 
 export const exchangeCurrency = async credentials => {
